@@ -18,6 +18,13 @@
       </mat-select>
     </mat-form-field>
 
+    @if (selectedState?.extraFieldLabel) {
+      <mat-form-field appearance="fill">
+        <mat-label>{{ selectedState?.extraFieldLabel }}</mat-label>
+        <input matInput [(ngModel)]="extraFieldValue" name="extraField" />
+      </mat-form-field>  
+    }
+
     <button mat-raised-button color="primary" type="submit">Submit</button>
 
     @if(taxPaid !== null) {

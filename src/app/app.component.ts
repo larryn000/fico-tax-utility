@@ -8,11 +8,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { STATE_TAXES, StateInformation } from './constants/state-taxes';
+import { TaxCalculatorService } from './services/tax-calculator.service';
 
 @Component({
   selector: 'app-root',
   imports: [
-    CommonModule, 
     FormsModule, 
     MatInputModule, 
     MatOptionModule, 
@@ -25,14 +25,14 @@ import { STATE_TAXES, StateInformation } from './constants/state-taxes';
 })
 export class AppComponent {
   @Input() income: number = 0;
+  @Input() extraFieldValue: number = 0;
   @Input() selectedState: StateInformation | undefined;
 
-  title = 'fico-tax-utility';
   stateTaxes = STATE_TAXES;
 
   taxPaid: number | null = null;
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(private snackBar: MatSnackBar, private taxCalculatorService: TaxCalculatorService) {}
 
   onSubmit() {
     if (this.income < 0 || !this.income || !this.selectedState) {
@@ -43,6 +43,6 @@ export class AppComponent {
       return;
     }
 
-    this.taxPaid = (Number(this.income)) * this.selectedState?.tax;
+    this.taxPaid = this.taxCalculatorService.calculateTaxes(this.income, this.selectedState.state, this.extraFieldValue);
   }
 }
