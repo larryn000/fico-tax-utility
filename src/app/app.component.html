@@ -1,8 +1,30 @@
-<input type="number" [(ngModel)]="income">
-<input type="string" [(ngModel)]="state">
+<h1 class="title"> FICO Tax Calculator </h1>
 
-<button (click)="onSubmit()">Submit</button>
+<mat-card class="form-card">
+  <form (ngSubmit)="onSubmit()" #form="ngForm" class="form-container">
+    <mat-form-field appearance="fill"> 
+      <mat-label>Income</mat-label> 
+      <input matInput type="number" [(ngModel)]="income" name="income" min="0" required/>
+    </mat-form-field>
 
-@if (taxPaid > 0) {
-  <a>{{ taxPaid }}</a>
-}
+    <mat-form-field appearance="fill">
+      <mat-label>Select a State</mat-label>
+      <mat-select [(ngModel)]="selectedState" name="selectedState.state" required>
+        @for (stateTax of stateTaxes; track stateTax.state) {
+          <mat-option [value]="stateTax">
+            {{ stateTax.name }}
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+
+    @if(taxPaid !== null) {
+      <mat-card class="result-card">
+        <h2 class="result-title">Tax Calculation Result</h2>
+        <p class="result">{{ taxPaid }}</p>
+      </mat-card>
+    }
+  </form>
+</mat-card>

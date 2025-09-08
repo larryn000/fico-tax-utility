@@ -1,0 +1,35 @@
+.title {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.form-card {
+  max-width: 400px;
+  margin: 32px auto;
+  padding: 24px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+.result-title {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.result {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 1.2rem;    
+}
